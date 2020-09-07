@@ -25,6 +25,8 @@ include(GrPlatform) #define LIB_SUFFIX
 include_directories(${Boost_INCLUDE_DIR} ${IIO_INCLUDE_DIRS} ${LIBM2K_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
+find_package(Boost COMPONENTS chrono REQUIRED)
+
 list(APPEND m2k_sources
         analog_in_converter_impl.cc
         analog_in_source_impl.cc
@@ -51,7 +53,8 @@ target_link_libraries(gnuradio-m2k
         gnuradio::gnuradio-runtime
         gnuradio::gnuradio-blocks
         ${IIO_LIBRARIES}
-        ${M2K_LIBRARIES})
+        ${M2K_LIBRARIES}
+	${Boost_LIBRARIES})
 
 target_include_directories(gnuradio-m2k
         PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
